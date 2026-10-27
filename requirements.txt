@@ -1,0 +1,10 @@
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.2.0
+xgboost>=1.7.0
+shap>=0.42.0
+deap>=1.3.3
+pytest>=7.3.0
+jupyter>=1.0.0
