@@ -28,7 +28,7 @@ results, reducing off-spec product and energy waste.
 | `data/debutanizer_final_training_data.csv` | 2394 rows, normalised [0, 1], 7 inputs + C4 target |
 | `data/debutanizer_data_estimated_real_units.csv` | Same data in **assumed** units. Do not train on this. |
 
-Columns: `u1` (top temperature), `u2` (top pressure), `u3` (reflux flow), `u4` (flow to next process), `u5` (6th tray temperature), `u6` (bottom temperature 1), `u7` (bottom temperature 2), `C4` (target: bottom butane concentration).
+Columns: `u1` (top temperature), `u2` (top pressure), `u3` (reflux flow), `u4` (flow to next process), `u5` (6th tray temperature), `u6` (bottom temperature 1), `u7` (bottom temperature 2), `C4` (target: bottom butane concentration). These names are the commonly reported mapping in the literature; they are not confirmed by the original data source, and the identity of u7 in particular is disputed. Units are unknown because the data is normalised to [0, 1].
 
 ---
 
@@ -63,6 +63,8 @@ Hyperparameter selection is based strictly on validation RMSE. The test set is n
 
 ## Results
 
+The persistence baseline predicts C4(t) from the lab value C4(t-4), so it needs lab data. It is the fair reference for the autoregressive models. For the causal models (sensors only, no lab values), the fair reference is R² = 0, i.e. predicting the mean. Negative R² means worse than the mean.
+
 ### Causal Variants (process variables only, no lab feedback)
 
 | Model | Val RMSE | Test RMSE | Test MAE | Test R² | Test Bias |
@@ -72,6 +74,10 @@ Hyperparameter selection is based strictly on validation RMSE. The test set is n
 | RandomForest | 0.1620 | 0.2228 | 0.1785 | -0.2136 | +0.0635 |
 | XGBoost | 0.1361 | 0.2193 | 0.1707 | -0.1758 | +0.0686 |
 | SVR | 0.1469 | 0.1962 | 0.1558 | 0.0586 | +0.0478 |
+| LinearRegression (lag16) | 0.1095 | 0.1538 | 0.1228 | 0.4238 | +0.0918 |
+| RandomForest (lag16) | 0.1098 | 0.1546 | 0.1182 | 0.4179 | +0.0454 |
+| XGBoost (lag16) | 0.0992 | 0.1501 | 0.1174 | 0.4515 | +0.0561 |
+| SVR (lag16) | 0.1351 | 0.1898 | 0.1488 | 0.1231 | +0.0902 |
 
 > ⚠️ **None of the causal ML models beat the persistence baseline.** The process sensors alone
 > carry approximately 10-45% of the C4 variance in the test period. This is an honest result
@@ -83,11 +89,11 @@ Hyperparameter selection is based strictly on validation RMSE. The test set is n
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **Persistence_Baseline** | 0.0579 | 0.0589 | 0.0436 | 0.9152 | +0.0010 |
 | LinearRegression (lag4) | 0.0204 | 0.0220 | 0.0173 | 0.9882 | +0.0115 |
-| **RandomForest (lag4)** | **0.0428** | **0.0617** | **0.0499** | **0.9070** | +0.0251 |
+| RandomForest (lag4) | 0.0428 | 0.0617 | 0.0499 | 0.9070 | +0.0251 |
 | XGBoost (lag4) | 0.0467 | 0.0674 | 0.0510 | 0.8888 | +0.0254 |
 | SVR (lag4) | 0.1163 | 0.1036 | 0.0750 | 0.7375 | +0.0411 |
-| LinearRegression (lag16) | 0.0164 | 0.0195 | 0.0157 | 0.9907 | +0.0091 |
-| **RandomForest (lag16)** | 0.0521 | **0.0544** | **0.0355** | **0.9280** | +0.0002 |
+| **LinearRegression (lag16)** | **0.0164** | **0.0195** | **0.0157** | **0.9907** | +0.0091 |
+| RandomForest (lag16) | 0.0521 | 0.0544 | 0.0355 | 0.9280 | +0.0002 |
 | XGBoost (lag16) | 0.0339 | 0.0584 | 0.0388 | 0.9168 | +0.0018 |
 
 > **Linear Regression on the autoregressive feature set achieves the lowest test RMSE (0.0195)**,

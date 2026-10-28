@@ -11,9 +11,9 @@ This study evaluated four machine learning architectures (Linear Regression, Ran
 ### Ranked Benchmark: `causal_lag4`
 | Model | Val RMSE | Test RMSE | Test MAE | Test R² | Test Bias |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| **XGBoost** | 0.1361 | 0.2193 | 0.1707 | -0.1758 | +0.0686 |
+| **XGBoost** | 0.1353 | 0.2230 | 0.1748 | -0.2159 | +0.0741 |
 | **SVR** | 0.1469 | 0.1962 | 0.1558 | 0.0586 | +0.0478 |
-| **RandomForest** | 0.1620 | 0.2228 | 0.1785 | -0.2136 | +0.0635 |
+| **RandomForest** | 0.1622 | 0.2223 | 0.1779 | -0.2078 | +0.0632 |
 | **LinearRegression** | 0.1927 | 0.1909 | 0.1552 | 0.1094 | +0.0482 |
 
 ### Ranked Benchmark: `persistence_causal_lag16`
@@ -26,7 +26,7 @@ This study evaluated four machine learning architectures (Linear Regression, Ran
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **XGBoost** | 0.0992 | 0.1501 | 0.1174 | 0.4515 | +0.0561 |
 | **LinearRegression** | 0.1095 | 0.1538 | 0.1228 | 0.4238 | +0.0918 |
-| **RandomForest** | 0.1098 | 0.1546 | 0.1182 | 0.4179 | +0.0454 |
+| **RandomForest** | 0.1133 | 0.1531 | 0.1166 | 0.4296 | +0.0440 |
 | **SVR** | 0.1351 | 0.1898 | 0.1488 | 0.1231 | +0.0902 |
 
 ### Ranked Benchmark: `persistence_autoregressive_lag4`
@@ -38,8 +38,8 @@ This study evaluated four machine learning architectures (Linear Regression, Ran
 | Model | Val RMSE | Test RMSE | Test MAE | Test R² | Test Bias |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **LinearRegression** | 0.0204 | 0.0220 | 0.0173 | 0.9882 | +0.0115 |
-| **RandomForest** | 0.0428 | 0.0617 | 0.0499 | 0.9070 | +0.0251 |
-| **XGBoost** | 0.0467 | 0.0674 | 0.0510 | 0.8888 | +0.0254 |
+| **RandomForest** | 0.0434 | 0.0622 | 0.0505 | 0.9056 | +0.0260 |
+| **XGBoost** | 0.0466 | 0.0678 | 0.0515 | 0.8875 | +0.0257 |
 | **SVR** | 0.1163 | 0.1036 | 0.0750 | 0.7375 | +0.0411 |
 
 ### Ranked Benchmark: `persistence_autoregressive_lag16`
@@ -51,8 +51,8 @@ This study evaluated four machine learning architectures (Linear Regression, Ran
 | Model | Val RMSE | Test RMSE | Test MAE | Test R² | Test Bias |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **LinearRegression** | 0.0164 | 0.0195 | 0.0157 | 0.9907 | +0.0091 |
-| **XGBoost** | 0.0339 | 0.0584 | 0.0388 | 0.9168 | +0.0018 |
-| **RandomForest** | 0.0521 | 0.0544 | 0.0355 | 0.9280 | +0.0002 |
+| **XGBoost** | 0.0339 | 0.0585 | 0.0390 | 0.9167 | +0.0021 |
+| **RandomForest** | 0.0526 | 0.0535 | 0.0356 | 0.9303 | +0.0006 |
 | **SVR** | 0.1209 | 0.1323 | 0.0922 | 0.5739 | +0.0440 |
 
 ## Plain-English Findings
